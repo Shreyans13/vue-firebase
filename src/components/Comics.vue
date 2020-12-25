@@ -3,10 +3,10 @@
         <button class="button logout" v-on:click="logout" >Logout</button>
         <article class="covers" v-for="(comic, idx) in comics" :key="idx">
             <div>
-                <img style="margin: 10px" :src="comic.image" height="291px" width="192px" alt="Comic Image">
+                <img style="margin: 10px" :src="comic.image" height="250px" width="250px" alt="Comic Image">
                 <p> {{ comic.name }} </p>
                 <hr>
-                <button class="button" @click="deleteComic(comic,id)">Delete</button>
+                <button class="button" @click="deleteComic(comic.id)">Delete</button>
             </div>
         </article>
         
@@ -16,16 +16,11 @@
             <input v-model="image" placeholder="Comic Image" class="input" required>
             <button type="submit" class="button">Add a New Comic</button>
         </form>
-        {{ comics }}
-        <button v-on:click="displayComic()">Display Comic</button>
-        {{ temp }}
     </div>
 </template>
 
 <script>
 import firebase from '../firebase'
-// import db from '../firebase'
-// import { db } from '../main'
 
 export default {
     name : 'Comics',
@@ -33,23 +28,10 @@ export default {
         return {
             comics: [],
             name: '',
-            image: '',
-            temp: []
+            image: ''
         }
     },
-    // firestore() {
-    //     return {
-    //         comics: db.collection('comics').orderBy('createdAt')
-    //     }
-    // },
-    // mounted() {
-        // this.comics = firebase.firestore().collection('comics').orderBy('createdAt')
-    // },
     methods: {
-        displayComic() {
-            this.comics = firebase.firestore().collection('comics')
-            this.temp = firebase.firestore().collection('comics').doc()
-        },
         addComic (name, image) {
             const createdAt = new Date();
             firebase.firestore().collection('comics').add({name, image, createdAt})
@@ -66,7 +48,18 @@ export default {
 
             console.log("log out")
         }
-    }
+    },
+    mounted() {
+        firebase.firestore().collection('comics').orderBy('createdAt').onSnapshot(snaps => {
+            let array = []
+            snaps.forEach((info) => {
+                let d = info.data()
+                d["id"] = info.id
+                array.push(d)
+            })
+            this.comics = array
+        })
+    },
 }
 </script>
 
