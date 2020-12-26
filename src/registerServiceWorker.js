@@ -6,6 +6,10 @@ if ("serviceWorker" in navigator) {
     window.location.reload();
   })
   wb.register();
+  wb.addEventListener("load", () => {
+    wb.update()
+  })
+  // wb.update();
 } else {
   wb = null;
 }
