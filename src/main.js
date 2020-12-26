@@ -5,6 +5,11 @@ import router from './router/index'
 import VueRouter from 'vue-router'
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
+// import './registerServiceWorker'
+
+import wb from "./registerServiceWorker"
+
+Vue.prototype.$workbox = wb;
 
 Vue.use(Buefy)
 Vue.config.productionTip = false

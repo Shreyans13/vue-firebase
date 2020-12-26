@@ -1,28 +1,35 @@
 <template>
-  <div class="sign-up">
-    <img class="img" src="../assets/dc_logo.jpg" width="300px" alt="DC Logo">
-    <h3>Create a new account</h3>
-    <input
-      v-model="email" 
-      type="text" 
-      class="input" 
-      placeholder="Email" 
-      required>
-    <br>
-    <input 
-      v-model="password"
-      type="password" 
-      class="input" 
-      placeholder="Password" 
-      required>
-    <br>
-    <button v-on:click="signUp" class="button">Sign Up!</button>
-    <button class="button">
-      <router-link to="/login">
-        Back
-      </router-link>
-    </button>
-  </div>
+  <div class="columns is-centered is-variable is-1-mobile mt-6">
+        <div class="column is-half">
+            <div class="is-flex is-justify-content-center">
+                <img class="" src=".././assets/vue.png" alt="Vue">
+                <img src=".././assets/firebase.png" alt="Vue">
+            </div>
+            <h3 class="is-flex is-justify-content-center">Vue + Firebase</h3>
+            <div class="mx-5">
+                <input 
+                    type="text"
+                    v-model="email"
+                    placeholder="Email address"
+                    class="input my-3"
+                    required>
+                <br />
+                <input 
+                    type="password"
+                    v-model="password"
+                    placeholder="Password"
+                    class="input my-3"
+                    required>
+                <br />
+                <button v-on:click="signUp" class="button">Sign Up!</button>
+                <button class="button">
+                <router-link to="/login">
+                    Back
+                </router-link>
+                </button>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -51,33 +58,3 @@
 </script>
 
 
-<style scoped>
-.sign-up {
-  margin: auto;
-  width: 50%;
-  padding: 10px;
-}
-input {
-  /* align-self: center; */
-  margin: 10px 0;
-  /* width: auto; */
-  padding: 15px;
-}
-button {
-  margin: 10px 0;
-  /* background-color: #0476F2; */
-}
-a {
-  /* color: #2c3e50; */
-}
-p {
-  margin-top: 40px;
-  font-size: 13px;
-}
-h3 {
-  font-weight: normal;
-}
-.img {
-        margin-left: 30%;   
-    }
-</style>

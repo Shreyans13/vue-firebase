@@ -1,42 +1,60 @@
 <template>
-    <div>
-        <Navbar />
-        <div class="columns m-6 is-multiline">
-            <div class="column is-one-fifth" v-for="i in 7" :key="i">
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-4by3">
-                        <img src="https://cdn.vox-cdn.com/thumbor/2hcZHf3IO6IRSi9iyqctVhmBT8g=/1400x1050/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/19736955/GettyImages_1202254631.jpg" alt="Placeholder image">
-                        </figure>
-                    </div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-content">
-                                <p class="title is-4">John Smith</p>
-                            </div>
-                        </div>
-                    </div>
-                    <footer class="card-footer">
-                        <a href="#" class="card-footer-item">Delete</a>
-                    </footer>
-                </div>
+  <div class="columns is-centered is-variable is-1-mobile mt-6">
+        <div class="column is-half">
+            <div class="is-flex is-justify-content-center">
+                <img class="" src=".././assets/vue.png" alt="Vue">
+                <img src=".././assets/firebase.png" alt="Vue">
             </div>
-        </div>
-        <div class="notification is-primary mx-5 ">
-            <div class="buttons is-justify-content-center">
-                <b-button type="is-primary" inverted>Add a Comic</b-button>
+            <h3 class="is-flex is-justify-content-center">Vue + Firebase</h3>
+            <div class="mx-5">
+                <input 
+                    type="text"
+                    v-model="email"
+                    placeholder="Email address"
+                    class="input my-3"
+                    required>
+                <br />
+                <input 
+                    type="password"
+                    v-model="password"
+                    placeholder="Password"
+                    class="input my-3"
+                    required>
+                <br />
+                <button v-on:click="signUp" class="button">Sign Up!</button>
+                <button class="button">
+                <router-link to="/login">
+                    Back
+                </router-link>
+                </button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import Navbar from './subComponents/navbar'
-export default {
-    name: 'Test',
-    components : {
-        'Navbar' : Navbar
+  import firebase from '../firebase'
+  
+  export default {
+    name: 'signup',
+    data () {
+      return {
+          email: '',
+          password: ''
+      }
+    },
+    methods: {
+      signUp () {
+        firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+        .then((user) => {
+            console.log(user)
+            this.$router.replace('/login')
+        }).catch((err) => {
+            alert(err.message)
+        });
+      }
     }
-}
+  }
 </script>
+
 
