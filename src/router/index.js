@@ -5,6 +5,7 @@ import firebase from 'firebase'
 import Comics from '../components/Comics'
 import Login from '../components/Login'
 import SignUp from '../components/SignUp'
+import Test from '../components/Test'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ let router = new Router({
             path: '/signup',
             name: 'SignUp',
             component: SignUp
+        },
+        {
+            path: '/test',
+            name: 'Test',
+            component: Test
         },
         {
             path: '/comics',

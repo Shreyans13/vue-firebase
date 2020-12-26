@@ -1,6 +1,6 @@
 <template>
   <div class="sign-up">
-    <img src="../assets/dc_logo.jpg" width="300px" alt="DC Logo">
+    <img class="img" src="../assets/dc_logo.jpg" width="300px" alt="DC Logo">
     <h3>Create a new account</h3>
     <input
       v-model="email" 
@@ -58,17 +58,17 @@
   padding: 10px;
 }
 input {
-  align-self: center;
+  /* align-self: center; */
   margin: 10px 0;
-  width: auto;
+  /* width: auto; */
   padding: 15px;
 }
 button {
   margin: 10px 0;
-  background-color: #0476F2;
+  /* background-color: #0476F2; */
 }
 a {
-  color: #2c3e50;
+  /* color: #2c3e50; */
 }
 p {
   margin-top: 40px;
@@ -77,4 +77,7 @@ p {
 h3 {
   font-weight: normal;
 }
+.img {
+        margin-left: 30%;   
+    }
 </style>

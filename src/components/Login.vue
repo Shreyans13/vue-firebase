@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <img src="../assets/dc_logo.jpg" alt="Dc Logo" width="300px">
+        <img class="img" src="../assets/dc_logo.jpg" alt="Dc Logo" width="300px">
         <h3>DC Comics Rebirth - Covers</h3>
         <input 
             type="text"
@@ -16,7 +16,7 @@
             class="input"
             required>
         <br />
-        <button v-on:click="login" class="button">Enter</button>
+        <button v-on:click="login" class="button">Login</button>
         <p>
             <router-link to="/signup">
                 New Here? Create a new account
@@ -53,9 +53,9 @@ export default {
 
 <style scoped>
     .login {
-        /* align-self: center; */
+        align-self: center;
         /* margin-top: 40px; */
-        margin: auto;
+        margin-left: 25%;
         width: 50%;
         padding: 10px;
     }
@@ -67,7 +67,6 @@ export default {
     }
     button {
         margin: 10px 0;
-        background-color: #0476F2;
         /* color: whitesmoke; */
     }
     a {
@@ -77,5 +76,8 @@ export default {
     p {
         margin-top: 40px;
         font-size: 13px;
+    }
+    .img {
+        margin-left: 30%;   
     }
 </style>

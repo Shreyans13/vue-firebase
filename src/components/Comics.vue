@@ -1,29 +1,67 @@
 <template>
     <div>
-        <button class="button logout" v-on:click="logout" >Logout</button>
-        <article class="covers" v-for="(comic, idx) in comics" :key="idx">
-            <div>
-                <img style="margin: 10px" :src="comic.image" height="250px" width="250px" alt="Comic Image">
-                <p> {{ comic.name }} </p>
-                <hr>
-                <button class="button" @click="deleteComic(comic.id)">Delete</button>
+        <Navbar />
+        <div class="columns m-6 is-multiline">
+            <div class="column is-one-fifth" v-for="(comic, idx) in comics" :key="idx">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                        <img :src="comic.image" alt="Placeholder image">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-4">{{comic.name}}</p>
+                            </div>
+                        </div>
+                        <div class="content">
+                            {{comic.description}}
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="#" class="card-footer-item" @click="deleteComic(comic.id)">Delete</a>
+                    </footer>
+                </div>
             </div>
-        </article>
-        
-        <form @submit="addComic(name, image)">
-            <h2>Add a new Comic Cover</h2>
-            <input v-model="name" placeholder="Comic Name" class="input" required>
-            <input v-model="image" placeholder="Comic Image" class="input" required>
-            <button type="submit" class="button">Add a New Comic</button>
-        </form>
+            <div class="column is-one-fifth">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image">
+                        <img src="https://media4.giphy.com/media/14czrmo1yML85y/giphy.gif" alt="Placeholder image">
+                        </figure>
+                    </div>
+                        <form @submit="addComic(name, image,description)">
+                            <div class="card-content">
+                                <div class="media">
+                                    <div class="media-content">
+                                        <p class="title is-4">Add a new Comic</p>
+                                        <input v-model="name" placeholder="Comic Name" class="input" required>
+                                        <input v-model="image" placeholder="Comic Image" class="input" required>
+                                        <input v-model="description" placeholder="Comic Description" class="input" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <footer class="card-footer">
+                                <a v-on:click="addComic(name, image,description)" class="card-footer-item">Add a New Comic</a>
+                            </footer>
+                        </form>
+                </div>
+            </div>
+            
+        </div>
     </div>
 </template>
 
 <script>
 import firebase from '../firebase'
-
+// import Navbar from '../components/subComponents/navbar'
+import Navbar from './subComponents/navbar.vue'
 export default {
     name : 'Comics',
+    components : {
+        'Navbar' : Navbar
+    },
     data() {
         return {
             comics: [],
@@ -32,11 +70,12 @@ export default {
         }
     },
     methods: {
-        addComic (name, image) {
+        addComic (name, image, description) {
             const createdAt = new Date();
-            firebase.firestore().collection('comics').add({name, image, createdAt})
+            firebase.firestore().collection('comics').add({name, image, description ,createdAt})
             this.name = ''
             this.image = ''
+            this.description = ''
         },
         deleteComic(id) {
             firebase.firestore().collection('comics').doc(id).delete()
@@ -62,30 +101,3 @@ export default {
     },
 }
 </script>
-
-<style scoped>
-    h1, h2 {
-        font-weight: normal;
-    }
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-    a {
-        color: black;
-    }
-    input, button {
-        margin-bottom: 10px;
-    }
-    button {
-        background-color: #0476F2;
-    }
-    .logout {
-        left: 50%;
-        top: 100%;
-    }
-</style>
