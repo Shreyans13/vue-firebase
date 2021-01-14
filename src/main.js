@@ -1,21 +1,18 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router/index'
-// import firebase from 'firebase/app'
-import VueRouter from 'vue-router'
-import Buefy from 'buefy'
-import 'buefy/dist/buefy.css'
-// import './registerServiceWorker'
+import Vue from "vue";
+import App from "./App.vue";
+import VueRouter from "vue-router";
+import Buefy from "buefy";
 
-import wb from "./registerServiceWorker"
+import "buefy/dist/buefy.css";
+import "./registerServiceWorker";
 
-Vue.prototype.$workbox = wb;
+import router from "./routers/index";
 
-Vue.use(Buefy)
-Vue.config.productionTip = false
-Vue.use(VueRouter)
+Vue.use(Buefy);
+Vue.config.productionTip = false;
+Vue.use(VueRouter);
 
 new Vue({
-    router,
-    render: h => h(App),
-}).$mount('#app')
+  router,
+  render: h => h(App)
+}).$mount("#app");
